@@ -15,7 +15,7 @@
 <title>Servlet OAuth example</title>
 </head>
 <body>
-	<h2>Servlet OAuth example</h2>
+	<h2>Server</h2>
 	<br>
 	<div class="g-signin2" data-onsuccess="onSignIn"></div>
 
