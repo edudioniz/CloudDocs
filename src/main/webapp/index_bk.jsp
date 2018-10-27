@@ -37,23 +37,49 @@
 		    </header>
 
 	      	<main role="main" class="inner cover">
-	        	<h1 class="cover-heading">¡Firma tus documentos!</h1>
+	        	<h1 class="cover-heading">Â¡Firma tus documentos!</h1>
 	        	<p class="lead">Plataforma de firma de documentos con dispositivos de firma en la nube. Sube tu firma a TrustedX y firma tus documentos en la nube.</p>
 	        	<p class="lead">
 	          		<div class="btn-group btn-group-lg" role="group" aria-label="Botones de Autentificacion">
-				  		<button type="button" class="btn btn-secondary auth-button-drive"><i class="fab fa-google-drive"></i> Google</button>
-				  		<button type="button" class="btn btn-secondary auth-button-dropbox"><i class="fab fa-dropbox"></i> Dropbox</button>
+				  		<button type="button" class="btn btn-secondary auth-button"><i class="fab fa-google-drive"></i> Google</button>
+				  		<button type="button" class="btn btn-secondary auth-button"><i class="fab fa-dropbox"></i> Dropbox</button>
 					</div>
-                        
 	        	</p>
 	      	</main>
 	      	<footer class="mastfoot mt-auto">
 	        	<div class="inner">
-	        		<p>Proyecto fin de máster.</p>
+	        		<p>Proyecto fin de mÃ¡ster.</p>
 	        	</div>
 	    	</footer>
 	    </div>
    
+	<div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+  <script>
+      //google callback. This function will redirect to our login servlet
+      function onSignIn(googleUser) {
+         var profile = googleUser.getBasicProfile();
+         console.log('ID: ' + profile.getId());
+         console.log('Name: ' + profile.getName());
+         console.log('Image URL: ' + profile.getImageUrl());
+         console.log('Email: ' + profile.getEmail());
+         console.log('id_token: ' + googleUser.getAuthResponse().id_token);
+
+         //do not post all above info to the server because that is not secure.
+         //just send the id_token
+
+         var redirectUrl = 'login';
+
+         //using jquery to post data dynamically
+         var form = $('<form action="' + redirectUrl + '" method="post">' +
+                          '<input type="text" name="id_token" value="' +
+                           googleUser.getAuthResponse().id_token + '" />' +
+                                                                '</form>');
+         $('body').append(form);
+         form.submit();
+      }
+
+   </script>
 
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="http://code.jquery.com/jquery-latest.min.js"
@@ -62,12 +88,8 @@
 
 
 		<script type="text/javascript">
-	    	$('.auth-button-dropbox').click(function(){
-	    		window.location.href = "oauth?dropbox";
-	    		return false;
-	    	});
-                $('.auth-button-drive').click(function(){
-	    		window.location.href = "oauth?drive";
+	    	$('.auth-button').click(function(){
+	    		window.location.href = "nav.jsp";
 	    		return false;
 	    	});
 	    </script>
